@@ -1,7 +1,7 @@
 // Shared configuration & bilingual dictionary (English & Malayalam)
 window.HAMPER_CONFIG = {
   // Paste your deployed Google Apps Script Web App URL here:
-  GOOGLE_SHEET_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbwR2YZwoOdOa7pitPeWN__W9scy2MM63pp1yPymXUqI6FSwbBFj9gyEvGA28qQHOjw-/exec"
+  GOOGLE_SHEET_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbzGwq-bfwmGTU0RUvEIXflcAAP_PS2PUpgDiZrjBFZbgwH3jKIRAjvom1RLf51rQR3A/exec"
 };
 
 window.HAMPER_TRANSLATIONS = {
