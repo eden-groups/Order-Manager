@@ -3,10 +3,10 @@
 class HamperOrderDrawer extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
     this.isOpen = false;
     this.selectedAddon = null; // 'wine' | 'cookies' | 'lights'
-    this.lang = localStorage.getItem('hamper_lang') || 'en';
+    this.lang = localStorage.getItem("hamper_lang") || "en";
   }
 
   connectedCallback() {
@@ -14,7 +14,10 @@ class HamperOrderDrawer extends HTMLElement {
   }
 
   get translations() {
-    return (window.HAMPER_TRANSLATIONS && window.HAMPER_TRANSLATIONS[this.lang]) || {};
+    return (
+      (window.HAMPER_TRANSLATIONS && window.HAMPER_TRANSLATIONS[this.lang]) ||
+      {}
+    );
   }
 
   setLang(lang) {
@@ -33,20 +36,20 @@ class HamperOrderDrawer extends HTMLElement {
   }
 
   updateCollapseState() {
-    const panel = this.shadowRoot.querySelector('.collapsible-panel');
+    const panel = this.shadowRoot.querySelector(".collapsible-panel");
     if (!panel) return;
     if (this.isOpen) {
-      panel.classList.add('open');
+      panel.classList.add("open");
       setTimeout(() => {
-        this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        this.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }, 150);
     } else {
-      panel.classList.remove('open');
+      panel.classList.remove("open");
     }
   }
 
   getAddonSvg(type) {
-    if (type === 'wine') {
+    if (type === "wine") {
       return `<svg viewBox="0 0 64 64" width="38" height="38">
         <rect x="26" y="6" width="12" height="10" rx="2" fill="#f4d06f"/>
         <path d="M26 16h12l4 12v28a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4V28l4-12z" fill="#8b1e24" stroke="#f4d06f" stroke-width="2"/>
@@ -54,7 +57,7 @@ class HamperOrderDrawer extends HTMLElement {
         <circle cx="32" cy="41" r="3" fill="#8b1e24"/>
       </svg>`;
     }
-    if (type === 'cookies') {
+    if (type === "cookies") {
       return `<svg viewBox="0 0 64 64" width="38" height="38">
         <circle cx="32" cy="34" r="20" fill="#d99b52" stroke="#f4d06f" stroke-width="2"/>
         <circle cx="25" cy="28" r="2.5" fill="#4a2c11"/>
@@ -78,17 +81,19 @@ class HamperOrderDrawer extends HTMLElement {
   selectAddon(type, btnEl) {
     this.selectedAddon = type;
 
-    this.shadowRoot.querySelectorAll('.addon-card').forEach(c => c.classList.remove('selected'));
-    btnEl.classList.add('selected');
+    this.shadowRoot
+      .querySelectorAll(".addon-card")
+      .forEach((c) => c.classList.remove("selected"));
+    btnEl.classList.add("selected");
 
-    const stage = this.shadowRoot.querySelector('.picker-stage');
-    const boxEl = this.shadowRoot.querySelector('.gift-box-target');
+    const stage = this.shadowRoot.querySelector(".picker-stage");
+    const boxEl = this.shadowRoot.querySelector(".gift-box-target");
     const stageRect = stage.getBoundingClientRect();
     const btnRect = btnEl.getBoundingClientRect();
     const boxRect = boxEl.getBoundingClientRect();
 
-    const flyer = document.createElement('div');
-    flyer.className = 'flying-item';
+    const flyer = document.createElement("div");
+    flyer.className = "flying-item";
     flyer.innerHTML = this.getAddonSvg(type);
 
     const startX = btnRect.left - stageRect.left + btnRect.width / 2 - 19;
@@ -96,21 +101,21 @@ class HamperOrderDrawer extends HTMLElement {
     const endX = boxRect.left - stageRect.left + boxRect.width / 2 - 19;
     const endY = boxRect.top - stageRect.top + 14;
 
-    flyer.style.setProperty('--start-x', `${startX}px`);
-    flyer.style.setProperty('--start-y', `${startY}px`);
-    flyer.style.setProperty('--end-x', `${endX}px`);
-    flyer.style.setProperty('--end-y', `${endY}px`);
+    flyer.style.setProperty("--start-x", `${startX}px`);
+    flyer.style.setProperty("--start-y", `${startY}px`);
+    flyer.style.setProperty("--end-x", `${endX}px`);
+    flyer.style.setProperty("--end-y", `${endY}px`);
 
     stage.appendChild(flyer);
 
     setTimeout(() => {
-      boxEl.classList.remove('bounce');
+      boxEl.classList.remove("bounce");
       void boxEl.offsetWidth;
-      boxEl.classList.add('bounce');
+      boxEl.classList.add("bounce");
 
-      const insideSlot = this.shadowRoot.querySelector('.box-inside-item');
+      const insideSlot = this.shadowRoot.querySelector(".box-inside-item");
       insideSlot.innerHTML = this.getAddonSvg(type);
-      insideSlot.classList.add('visible');
+      insideSlot.classList.add("visible");
       this.updateTexts();
     }, 480);
 
@@ -122,36 +127,47 @@ class HamperOrderDrawer extends HTMLElement {
   async handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
-    const submitBtn = this.shadowRoot.querySelector('.submit-btn');
+    const submitBtn = this.shadowRoot.querySelector(".submit-btn");
     const t = this.translations;
-    const sheetUrl = window.HAMPER_CONFIG && window.HAMPER_CONFIG.GOOGLE_SHEET_WEB_APP_URL;
-
+    const sheetUrl =
+      window.HAMPER_CONFIG && window.HAMPER_CONFIG.GOOGLE_SHEET_WEB_APP_URL;
+    const uploadedImageData = await this.getUploadedImageData(form);
+    if (!uploadedImageData) {
+      return;
+    }
     const customerName = form.customerName.value.trim();
     const whatsappNumber = form.whatsappNumber.value.trim();
     const deliveryAddress = form.deliveryAddress.value.trim();
     const landmark = form.landmark.value.trim();
     const deliveryContactPhone = form.deliveryContactPhone.value.trim();
 
-    const hamperName = this.lang === 'ml'
-      ? this.getAttribute('hamper-name-ml')
-      : this.getAttribute('hamper-name-en');
+    const hamperName =
+      this.lang === "ml"
+        ? this.getAttribute("hamper-name-ml")
+        : this.getAttribute("hamper-name-en");
 
     const addonLabel = this.selectedAddon
       ? t[`addon_${this.selectedAddon}`]
-      : (this.lang === 'ml' ? 'ഒന്നും തിരഞ്ഞെടുത്തിട്ടില്ല' : 'None');
-
+      : this.lang === "ml"
+        ? "ഒന്നും തിരഞ്ഞെടുത്തിട്ടില്ല"
+        : "None";
+    const { greetingPhotoBase64, greetingPhotoName, greetingPhotoMimeType } =
+      uploadedImageData;
     const orderPayload = {
       timestamp: new Date().toISOString(),
       language: this.lang,
-      hamperId: this.getAttribute('hamper-id'),
-      hamperName: this.getAttribute('hamper-name-en'),
-      basePrice: this.getAttribute('base-price'),
-      selectedAddon: this.selectedAddon || 'None',
+      hamperId: this.getAttribute("hamper-id"),
+      hamperName: this.getAttribute("hamper-name-en"),
+      basePrice: this.getAttribute("base-price"),
+      selectedAddon: this.selectedAddon || "None",
       customerName,
       whatsappNumber,
       deliveryAddress,
       landmark,
-      deliveryContactPhone
+      deliveryContactPhone,
+      greetingPhotoBase64,
+      greetingPhotoName,
+      greetingPhotoMimeType,
     };
 
     submitBtn.disabled = true;
@@ -160,61 +176,106 @@ class HamperOrderDrawer extends HTMLElement {
     try {
       if (sheetUrl && sheetUrl !== "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
         await fetch(sheetUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(orderPayload)
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderPayload),
         });
       } else {
-        await new Promise(resolve => setTimeout(resolve, 600));
-        console.info("Google Sheet Placeholder Mode - Order Payload:", orderPayload);
+        await new Promise((resolve) => setTimeout(resolve, 600));
+        console.info(
+          "Google Sheet Placeholder Mode - Order Payload:",
+          orderPayload,
+        );
       }
 
       // Reset form & gift box state
       form.reset();
       this.selectedAddon = null;
-      this.shadowRoot.querySelectorAll('.addon-card').forEach(c => c.classList.remove('selected'));
-      const insideSlot = this.shadowRoot.querySelector('.box-inside-item');
-      insideSlot.innerHTML = '';
-      insideSlot.classList.remove('visible');
+      this.shadowRoot
+        .querySelectorAll(".addon-card")
+        .forEach((c) => c.classList.remove("selected"));
+      const insideSlot = this.shadowRoot.querySelector(".box-inside-item");
+      insideSlot.innerHTML = "";
+      insideSlot.classList.remove("visible");
       this.updateTexts();
       this.close();
 
       // Dispatch custom event & open <order-success-modal>
-      this.dispatchEvent(new CustomEvent('order-placed', {
-        bubbles: true,
-        composed: true,
-        detail: { hamperName, addonLabel, whatsappNumber, orderPayload }
-      }));
+      this.dispatchEvent(
+        new CustomEvent("order-placed", {
+          bubbles: true,
+          composed: true,
+          detail: { hamperName, addonLabel, whatsappNumber, orderPayload },
+        }),
+      );
 
-      const modal = document.querySelector('order-success-modal');
-      if (modal && typeof modal.show === 'function') {
+      const modal = document.querySelector("order-success-modal");
+      if (modal && typeof modal.show === "function") {
         modal.show({ hamperName, addonLabel, whatsappNumber });
       }
     } catch (err) {
       console.error("Order submission error:", err);
-      alert(this.lang === 'ml'
-        ? "ക്ഷമിക്കണം, ഓർഡർ സമർപ്പിക്കുന്നതിൽ പിശക് സംഭവിച്ചു. വീണ്ടും ശ്രമിക്കുക."
-        : "Sorry, there was an error submitting your order. Please try again.");
+      alert(
+        this.lang === "ml"
+          ? "ക്ഷമിക്കണം, ഓർഡർ സമർപ്പിക്കുന്നതിൽ പിശക് സംഭവിച്ചു. വീണ്ടും ശ്രമിക്കുക."
+          : "Sorry, there was an error submitting your order. Please try again.",
+      );
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = this.translations.submit_btn;
     }
   }
+  async getUploadedImageData(form) {
+    const photoInput = form.querySelector('input[name="greetingPhoto"]');
+    const file = photoInput && photoInput.files && photoInput.files[0];
 
+    let greetingPhotoBase64 = "";
+    let greetingPhotoName = "";
+    let greetingPhotoMimeType = "";
+
+    if (file) {
+      // Optional guard: ~3 MB limit for smooth mobile uploads to Apps Script
+      const maxBytes = 3 * 1024 * 1024;
+      if (file.size > maxBytes) {
+        alert(
+          this.lang === "ml"
+            ? "ഫോട്ടോ 3 MB-ൽ താഴെ ആയിരിക്കണം."
+            : "Please choose a photo smaller than 3 MB.",
+        );
+        submitBtn.disabled = false;
+        submitBtn.textContent = this.translations.submit_btn;
+        return false;
+      }
+
+      const dataUrl = await readFileAsDataUrl(file);
+      // dataUrl looks like "data:image/jpeg;base64,/9j/4AAQ..."
+      const parts = dataUrl.split(",");
+      greetingPhotoBase64 = parts[1] || "";
+      greetingPhotoName = `${this.getAttribute("hamper-id")}-${Date.now()}-${file.name}`;
+      greetingPhotoMimeType = file.type || "image/jpeg";
+      return {
+        greetingPhotoBase64,
+        greetingPhotoName,
+        greetingPhotoMimeType,
+      };
+    }
+  }
   updateTexts() {
     const t = this.translations;
     const root = this.shadowRoot;
     if (!root || !t.pick_addon_label) return;
 
-    root.querySelector('[data-t="pick_addon_label"]').textContent = t.pick_addon_label;
+    root.querySelector('[data-t="pick_addon_label"]').textContent =
+      t.pick_addon_label;
     root.querySelector('[data-t="addon_wine"]').textContent = t.addon_wine;
-    root.querySelector('[data-t="addon_cookies"]').textContent = t.addon_cookies;
+    root.querySelector('[data-t="addon_cookies"]').textContent =
+      t.addon_cookies;
     root.querySelector('[data-t="addon_lights"]').textContent = t.addon_lights;
 
-    const boxStatus = root.querySelector('.box-status-text');
+    const boxStatus = root.querySelector(".box-status-text");
     if (this.selectedAddon) {
-      boxStatus.textContent = `${t.box_status_filled} ${t['addon_' + this.selectedAddon]}`;
+      boxStatus.textContent = `${t.box_status_filled} ${t["addon_" + this.selectedAddon]}`;
     } else {
       boxStatus.textContent = t.box_status_empty;
     }
@@ -225,12 +286,16 @@ class HamperOrderDrawer extends HTMLElement {
     root.querySelector('[data-t="wa_label"]').textContent = t.wa_label;
     root.querySelector('input[name="whatsappNumber"]').placeholder = t.wa_ph;
     root.querySelector('[data-t="addr_label"]').textContent = t.addr_label;
-    root.querySelector('textarea[name="deliveryAddress"]').placeholder = t.addr_ph;
-    root.querySelector('[data-t="landmark_label"]').textContent = t.landmark_label;
+    root.querySelector('textarea[name="deliveryAddress"]').placeholder =
+      t.addr_ph;
+    root.querySelector('[data-t="landmark_label"]').textContent =
+      t.landmark_label;
     root.querySelector('input[name="landmark"]').placeholder = t.landmark_ph;
-    root.querySelector('[data-t="contact_label"]').textContent = t.contact_label;
-    root.querySelector('input[name="deliveryContactPhone"]').placeholder = t.contact_ph;
-    root.querySelector('.submit-btn').textContent = t.submit_btn;
+    root.querySelector('[data-t="contact_label"]').textContent =
+      t.contact_label;
+    root.querySelector('input[name="deliveryContactPhone"]').placeholder =
+      t.contact_ph;
+    root.querySelector(".submit-btn").textContent = t.submit_btn;
   }
 
   render() {
@@ -479,15 +544,15 @@ class HamperOrderDrawer extends HTMLElement {
 
             <div class="addon-options">
               <button type="button" class="addon-card" data-addon="wine">
-                ${this.getAddonSvg('wine')}
+                ${this.getAddonSvg("wine")}
                 <span data-t="addon_wine">${t.addon_wine}</span>
               </button>
               <button type="button" class="addon-card" data-addon="cookies">
-                ${this.getAddonSvg('cookies')}
+                ${this.getAddonSvg("cookies")}
                 <span data-t="addon_cookies">${t.addon_cookies}</span>
               </button>
               <button type="button" class="addon-card" data-addon="lights">
-                ${this.getAddonSvg('lights')}
+                ${this.getAddonSvg("lights")}
                 <span data-t="addon_lights">${t.addon_lights}</span>
               </button>
             </div>
@@ -538,20 +603,37 @@ class HamperOrderDrawer extends HTMLElement {
               <input type="tel" name="deliveryContactPhone" required placeholder="${t.contact_ph}" />
             </div>
 
+            <div class="field">
+              <label data-t="photo_label">${t.photo_label}</label>
+              <input type="file" name="greetingPhoto" accept="image/*" />
+              <img class="photo-preview" alt="" style="display:none; max-width:100%; max-height:140px; margin-top:8px; border-radius:10px; object-fit:cover;" />
+            </div>
+            
             <button type="submit" class="submit-btn">${t.submit_btn}</button>
           </form>
         </div>
       </div>
     `;
 
-    this.shadowRoot.querySelectorAll('.addon-card').forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.selectAddon(btn.getAttribute('data-addon'), btn);
+    this.shadowRoot.querySelectorAll(".addon-card").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this.selectAddon(btn.getAttribute("data-addon"), btn);
       });
     });
 
-    this.shadowRoot.querySelector('.order-form').addEventListener('submit', (e) => this.handleSubmit(e));
+    this.shadowRoot
+      .querySelector(".order-form")
+      .addEventListener("submit", (e) => this.handleSubmit(e));
   }
 }
 
-customElements.define('hamper-order-drawer', HamperOrderDrawer);
+customElements.define("hamper-order-drawer", HamperOrderDrawer);
+// Helper: convert a File object to a Base64 data URL
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}

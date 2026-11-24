@@ -1,7 +1,7 @@
 // Shared configuration & bilingual dictionary (English & Malayalam)
 window.HAMPER_CONFIG = {
   // Paste your deployed Google Apps Script Web App URL here:
-  GOOGLE_SHEET_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbzGwq-bfwmGTU0RUvEIXflcAAP_PS2PUpgDiZrjBFZbgwH3jKIRAjvom1RLf51rQR3A/exec"
+  GOOGLE_SHEET_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbz-RjRyxErfD-p2_Oeh9yrnnN0CbZ3mq5I5NClW7yEykFxljfU5p3clnMzKDe5lxs3R/exec"
 };
 
 window.HAMPER_TRANSLATIONS = {
@@ -41,7 +41,8 @@ window.HAMPER_TRANSLATIONS = {
     success_summary_hamper: "Hamper:",
     success_summary_addon: "Selected Gift Add-on:",
     success_summary_wa: "WhatsApp:",
-    success_ok_btn: "Done"
+    success_ok_btn: "Done",
+    photo_label: "Greeting Card Photo (Optional)"
   },
   ml: {
     badge: "ക്രിസ്മസ് സ്പെഷ്യൽ 2026",
@@ -79,6 +80,7 @@ window.HAMPER_TRANSLATIONS = {
     success_summary_hamper: "ഹാംപർ:",
     success_summary_addon: "തിരഞ്ഞെടുത്ത സമ്മാനം:",
     success_summary_wa: "വാട്ട്‌സ്ആപ്പ്:",
-    success_ok_btn: "ശരി"
+    success_ok_btn: "ശരി",
+    photo_label: "ഗ്രീറ്റിംഗ് കാർഡിൽ പ്രിന്റ് ചെയ്യാനുള്ള ഫോട്ടോ (ഓപ്ഷണൽ)"
   }
 };
