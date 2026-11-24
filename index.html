@@ -75,7 +75,7 @@
 
     .floating-item {
       position: absolute;
-      opacity: 0.16;
+      opacity: 0.14;
       user-select: none;
       filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
       animation: floatBob 7s ease-in-out infinite;
@@ -172,48 +172,64 @@
     .card {
       background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(244, 208, 111, 0.22);
-      border-radius: 20px;
-      padding: 26px 20px;
+      border: 1px solid rgba(244, 208, 111, 0.25);
+      border-radius: 22px;
+      padding: 24px 20px 26px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
       border-color: #f4d06f;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+    }
+
+    .thumb-frame {
+      width: 100%;
+      height: 190px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      border: 1px solid rgba(244, 208, 111, 0.32);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+      background: #0d3624;
     }
 
     .card img.hamper-thumb {
-      width: 130px;
-      height: 130px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 16px;
-      margin-bottom: 16px;
-      background: #fff;
-      padding: 8px;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .card:hover img.hamper-thumb {
+      transform: scale(1.04);
     }
 
     .card h3 {
-      font-size: 1.3rem;
+      font-size: 1.32rem;
       color: #f4d06f;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       line-height: 1.35;
     }
 
     .card p.desc {
       font-size: 0.94rem;
       color: #e0ece6;
-      line-height: 1.6;
-      margin-bottom: 16px;
+      line-height: 1.62;
+      margin-bottom: 18px;
     }
 
     .price {
-      font-size: 1.35rem;
-      font-weight: bold;
+      font-size: 1.4rem;
+      font-weight: 700;
       color: #fffdf9;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
     }
 
     .btn {
@@ -278,39 +294,45 @@
       <span class="badge" data-i18n="badge">Holiday Collection 2026</span>
       <h1 data-i18n-html="title">Handcrafted <span>Christmas Hampers</span></h1>
       <p class="subtitle" data-i18n="subtitle">
-        Curated festive baskets filled with rich plum cakes, artisanal treats, candy canes, and holiday cheer—delivered straight to your loved ones.
+        Warm, festive gift boxes filled with rich holiday treats and personal touches—ready to bring smiles to your loved ones.
       </p>
     </header>
 
     <section class="hamper-grid">
-      <!-- Hamper 1 -->
+      <!-- Plan 1: The Classic Noel Basket (₹999) -->
       <div class="card">
-        <img class="hamper-thumb" src="https://media.istockphoto.com/id/1163562760/vector/christmas-hamper-gift-basket.jpg?s=612x612&w=0&k=20&c=EmEMXb9dIQ5Ha0EHbEg-ZgxpsLcbdZiR5N82yDq6Njo=" alt="Classic Festive Basket" />
+        <div class="thumb-frame">
+          <img class="hamper-thumb" src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=800&q=80" alt="The Classic Noel Basket" />
+        </div>
         <h3 data-i18n="card1_title">The Classic Noel Basket</h3>
-        <p class="desc" data-i18n="card1_desc">Traditional spiced plum cake, handmade chocolates, peppermint candy canes, and roasted nuts.</p>
-        <div class="price">₹1,499</div>
-        <button type="button" class="btn" onclick="toggleOrderDrawer('drawer-1')" data-i18n="order_btn">Customize & Order</button>
-        <hamper-order-drawer id="drawer-1" hamper-id="classic-noel" hamper-name-en="The Classic Noel Basket" hamper-name-ml="ക്ലാസിക് നോയൽ ബാസ്കറ്റ്" base-price="1499"></hamper-order-drawer>
-      </div>
-
-      <!-- Hamper 2 -->
-      <div class="card">
-        <img class="hamper-thumb" src="https://media.istockphoto.com/id/1354458572/vector/plum-cake-illustration-decorated-with-cashew-nuts.jpg?s=612x612&w=0&k=20&c=b45mlSj_27zno_ABhXm2coVVJIGJ2A7N3_qMj9B6I8g=" alt="Baker's Christmas Feast" />
-        <h3 data-i18n="card2_title">Baker's Plum Cake Box</h3>
-        <p class="desc" data-i18n="card2_desc">Rich cashew-topped Christmas plum cake paired with cinnamon cookies and hot cocoa mix.</p>
+        <p class="desc" data-i18n="card1_desc">A neatly presented box with a rich spiced holiday bake topped with festive toppings, a cozy scented candle, a custom photo keepsake card, and melt-in-the-mouth chocolate treats.</p>
         <div class="price">₹999</div>
-        <button type="button" class="btn" onclick="toggleOrderDrawer('drawer-2')" data-i18n="order_btn">Customize & Order</button>
-        <hamper-order-drawer id="drawer-2" hamper-id="bakers-plum" hamper-name-en="Baker's Plum Cake Box" hamper-name-ml="ബേക്കേഴ്സ് പ്ലം കേക്ക് ബോക്സ്" base-price="999"></hamper-order-drawer>
+        <button type="button" class="btn" onclick="toggleOrderDrawer('drawer-1')" data-i18n="order_btn">Order Now</button>
+        <hamper-order-drawer id="drawer-1" hamper-id="classic-noel" hamper-name-en="The Classic Noel Basket" hamper-name-ml="ക്ലാസിക് നോയൽ ബാസ്കറ്റ്" base-price="999"></hamper-order-drawer>
       </div>
 
-      <!-- Hamper 3 -->
+      <!-- Plan 2: The Festive Cellar Basket (₹1,499) -->
       <div class="card">
-        <img class="hamper-thumb" src="https://images.vexels.com/media/users/3/135643/isolated/svg/70551cf7d2d3ccbacf2ae7780e634a50.svg" alt="Grand Winter Wonderland Hamper" />
-        <h3 data-i18n="card3_title">Grand Winter Wonderland</h3>
-        <p class="desc" data-i18n="card3_desc">Our luxury wicker hamper packed with festive delicacies, sparkling grape drink, and holiday keepsakes.</p>
-        <div class="price">₹2,499</div>
-        <button type="button" class="btn" onclick="toggleOrderDrawer('drawer-3')" data-i18n="order_btn">Customize & Order</button>
-        <hamper-order-drawer id="drawer-3" hamper-id="winter-wonderland" hamper-name-en="Grand Winter Wonderland" hamper-name-ml="ഗ്രാൻഡ് വിന്റർ വണ്ടർലാൻഡ്" base-price="2499"></hamper-order-drawer>
+        <div class="thumb-frame">
+          <img class="hamper-thumb" src="https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=800&q=80" alt="The Festive Cellar Basket" />
+        </div>
+        <h3 data-i18n="card2_title">The Festive Cellar Basket</h3>
+        <p class="desc" data-i18n="card2_desc">Everything from The Classic Noel Basket—rich topped holiday bake, scented candle, custom photo card, and chocolate treats—plus a festive bottle to elevate the celebration.</p>
+        <div class="price">₹1,499</div>
+        <button type="button" class="btn" onclick="toggleOrderDrawer('drawer-2')" data-i18n="order_btn">Order Now</button>
+        <hamper-order-drawer id="drawer-2" hamper-id="festive-cellar" hamper-name-en="The Festive Cellar Basket" hamper-name-ml="ഫെസ്റ്റീവ് സെല്ലർ ബാസ്കറ്റ്" base-price="1499"></hamper-order-drawer>
+      </div>
+
+      <!-- Plan 3: Eden Signature Hamper (₹2,500) -->
+      <div class="card">
+        <div class="thumb-frame">
+          <img class="hamper-thumb" src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=800&q=80" alt="Eden Signature Hamper" />
+        </div>
+        <h3 data-i18n="card3_title">Eden Signature Hamper</h3>
+        <p class="desc" data-i18n="card3_desc">Everything from The Festive Cellar Basket, plus cheerful holiday caps for festive fun and a wholesome pack of dried fruits for holiday snacking.</p>
+        <div class="price">₹2,500</div>
+        <button type="button" class="btn" onclick="toggleOrderDrawer('drawer-3')" data-i18n="order_btn">Order Now</button>
+        <hamper-order-drawer id="drawer-3" hamper-id="eden-signature" hamper-name-en="Eden Signature Hamper" hamper-name-ml="ഈഡൻ സിഗ്നേച്ചർ ഹാംപർ" base-price="2500"></hamper-order-drawer>
       </div>
     </section>
   </main>
@@ -320,6 +342,9 @@
 
   <!-- Load Modular Web Component Files -->
   <script src="hamper-translations.js"></script>
+  <script src="hamper-media-utils.js"></script>
+  <script src="hamper-cookie-box.js"></script>
+  <script src="hamper-photo-picker.js"></script>
   <script src="hamper-order-drawer.js"></script>
   <script src="order-success-modal.js"></script>
 
