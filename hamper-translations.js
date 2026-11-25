@@ -31,8 +31,13 @@ window.HAMPER_TRANSLATIONS = {
     wa_card_btn: "Chat & Order on WhatsApp",
     wa_qr_caption: "Scan to Order on WhatsApp",
     close_btn: "Close",
-    complimentary_badge: "✨ Complimentary Butter Cookies added to your box!",
-    box_status_complimentary: "Includes Free Butter Cookies inside your box",
+    complimentary_cherry_badge:
+      "✨ Complimentary Cherry Fruits added to your box!",
+    box_status_cherry: "Cherry Fruits packed & box sealed!",
+
+    complimentary_cookie_badge:
+      "✨ Complimentary Butter Cookies added to your box!",
+    box_status_cookie: "Butter Cookies packed & box sealed!",
     form_heading: "Delivery Details",
     name_label: "Your Full Name *",
     name_ph: "Enter your name",
@@ -91,10 +96,13 @@ window.HAMPER_TRANSLATIONS = {
     wa_qr_caption: "സ്കാൻ ചെയ്ത് ഓർഡർ ചെയ്യൂ",
     order_btn: "ഓർഡർ ചെയ്യുക",
     close_btn: "അടയ്ക്കുക",
-    complimentary_badge:
+    complimentary_cherry_badge:
+      "✨ സൗജന്യ ചെറി ഫ്രൂട്ട്സ് നിങ്ങളുടെ ബോക്സിൽ ചേർത്തിട്ടുണ്ട്!",
+    box_status_cherry: "ചെറി ഫ്രൂട്ട്സ് ചേർത്ത് ബോക്സ് അടച്ചിരിക്കുന്നു!",
+
+    complimentary_cookie_badge:
       "✨ സൗജന്യ ബട്ടർ കുക്കീസ് നിങ്ങളുടെ ബോക്സിൽ ചേർത്തിട്ടുണ്ട്!",
-    box_status_complimentary:
-      "ബോക്സിൽ സൗജന്യ ബട്ടർ കുക്കീസ് ഉൾപ്പെടുത്തിയിട്ടുണ്ട്",
+    box_status_cookie: "ബട്ടർ കുക്കീസ് ചേർത്ത് ബോക്സ് അടച്ചിരിക്കുന്നു!",
     form_heading: "ഡെലിവറി വിവരങ്ങൾ",
     name_label: "നിങ്ങളുടെ മുഴുവൻ പേര് *",
     name_ph: "പേര് നൽകുക",

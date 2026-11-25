@@ -1,9 +1,9 @@
 class HamperOrderDrawer extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
     this.isOpen = false;
-    this.lang = localStorage.getItem('hamper_lang') || 'en';
+    this.lang = localStorage.getItem("hamper_lang") || "en";
   }
 
   connectedCallback() {
@@ -11,19 +11,26 @@ class HamperOrderDrawer extends HTMLElement {
   }
 
   get translations() {
-    return (window.HAMPER_TRANSLATIONS && window.HAMPER_TRANSLATIONS[this.lang]) || {};
+    return (
+      (window.HAMPER_TRANSLATIONS && window.HAMPER_TRANSLATIONS[this.lang]) ||
+      {}
+    );
   }
 
   get dailyLimit() {
-    return (window.HAMPER_CONFIG && window.HAMPER_CONFIG.DAILY_ORDER_LIMIT) || 100;
+    return (
+      (window.HAMPER_CONFIG && window.HAMPER_CONFIG.DAILY_ORDER_LIMIT) || 100
+    );
   }
 
   setLang(lang) {
     this.lang = lang;
     this.updateTexts();
-    this.shadowRoot.querySelectorAll('hamper-cookie-box, hamper-photo-picker').forEach((el) => {
-      if (typeof el.setLang === 'function') el.setLang(lang);
-    });
+    this.shadowRoot
+      .querySelectorAll("hamper-complimentary-box, hamper-photo-picker")
+      .forEach((el) => {
+        if (typeof el.setLang === "function") el.setLang(lang);
+      });
   }
 
   toggle() {
@@ -37,51 +44,52 @@ class HamperOrderDrawer extends HTMLElement {
   }
 
   updateCollapseState() {
-    const panel = this.shadowRoot.querySelector('.collapsible-panel');
-    const boxComp = this.shadowRoot.querySelector('hamper-cookie-box');
+    const panel = this.shadowRoot.querySelector(".collapsible-panel");
+    const boxComp = this.shadowRoot.querySelector("hamper-complimentary-box");
     if (!panel) return;
 
     if (this.isOpen) {
-      panel.classList.add('open');
-      if (boxComp && typeof boxComp.playDropAndClose === 'function') {
+      panel.classList.add("open");
+      if (boxComp && typeof boxComp.playDropAndClose === "function") {
         setTimeout(() => boxComp.playDropAndClose(), 120);
       }
       setTimeout(() => {
-        this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        this.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }, 160);
     } else {
-      panel.classList.remove('open');
-      if (boxComp && typeof boxComp.resetBox === 'function') {
+      panel.classList.remove("open");
+      if (boxComp && typeof boxComp.resetBox === "function") {
         boxComp.resetBox();
       }
     }
   }
 
   showLimitError_(msg) {
-    const errEl = this.shadowRoot.querySelector('.limit-error');
+    const errEl = this.shadowRoot.querySelector(".limit-error");
     if (!errEl) return;
     errEl.textContent = msg;
-    errEl.style.display = 'block';
+    errEl.style.display = "block";
   }
 
   clearLimitError_() {
-    const errEl = this.shadowRoot.querySelector('.limit-error');
+    const errEl = this.shadowRoot.querySelector(".limit-error");
     if (!errEl) return;
-    errEl.textContent = '';
-    errEl.style.display = 'none';
+    errEl.textContent = "";
+    errEl.style.display = "none";
   }
 
   async handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
-    const submitBtn = this.shadowRoot.querySelector('.submit-btn');
-    const photoPicker = this.shadowRoot.querySelector('hamper-photo-picker');
+    const submitBtn = this.shadowRoot.querySelector(".submit-btn");
+    const photoPicker = this.shadowRoot.querySelector("hamper-photo-picker");
     const t = this.translations;
-    const sheetUrl = window.HAMPER_CONFIG && window.HAMPER_CONFIG.GOOGLE_SHEET_WEB_APP_URL;
+    const sheetUrl =
+      window.HAMPER_CONFIG && window.HAMPER_CONFIG.GOOGLE_SHEET_WEB_APP_URL;
 
     this.clearLimitError_();
 
-    if (photoPicker && typeof photoPicker.validateSize === 'function') {
+    if (photoPicker && typeof photoPicker.validateSize === "function") {
       const check = photoPicker.validateSize();
       if (!check.valid) {
         this.showLimitError_(check.message);
@@ -94,13 +102,15 @@ class HamperOrderDrawer extends HTMLElement {
     const deliveryAddress = form.deliveryAddress.value.trim();
     const landmark = form.landmark.value.trim();
     const deliveryContactPhone = form.deliveryContactPhone.value.trim();
-    const customerNote = form.customerNote ? form.customerNote.value.trim() : '';
+    const customerNote = form.customerNote
+      ? form.customerNote.value.trim()
+      : "";
 
     submitBtn.disabled = true;
     submitBtn.textContent = t.submitting_btn;
 
     try {
-      if (sheetUrl && sheetUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+      if (sheetUrl && sheetUrl !== "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
         const count = window.HamperMediaUtils
           ? await window.HamperMediaUtils.fetchTodayOrderCount(sheetUrl)
           : 0;
@@ -110,70 +120,105 @@ class HamperOrderDrawer extends HTMLElement {
         }
       }
 
-      const hamperId = this.getAttribute('hamper-id') || 'hamper';
-      const photoData = photoPicker && typeof photoPicker.getCompressedPhoto === 'function'
-        ? await photoPicker.getCompressedPhoto(hamperId)
-        : { greetingPhotoBase64: '', greetingPhotoName: '', greetingPhotoMimeType: '' };
+      const hamperId = this.getAttribute("hamper-id") || "hamper";
+      const photoData =
+        photoPicker && typeof photoPicker.getCompressedPhoto === "function"
+          ? await photoPicker.getCompressedPhoto(hamperId)
+          : {
+              greetingPhotoBase64: "",
+              greetingPhotoName: "",
+              greetingPhotoMimeType: "",
+            };
 
-      const hamperName = this.lang === 'ml'
-        ? this.getAttribute('hamper-name-ml')
-        : this.getAttribute('hamper-name-en');
+      const hamperName =
+        this.lang === "ml"
+          ? this.getAttribute("hamper-name-ml")
+          : this.getAttribute("hamper-name-en");
 
-      const addonLabel = this.lang === 'ml' ? 'ബട്ടർ കുക്കീസ് (സൗജന്യം)' : 'Butter Cookies (Free)';
+      const complimentaryType =
+        this.getAttribute("complimentary-type") || "cookies";
+      const complimentaryItem =
+        complimentaryType === "cherries"
+          ? "Cherry Fruits"
+          : complimentaryType === "cookies"
+            ? "Butter Cookies"
+            : "Surprise Note";
+
+      const addonLabel =
+        complimentaryType === "cherries"
+          ? this.lang === "ml"
+            ? "ചെറി ഫ്രൂട്ട്സ് (സൗജന്യം)"
+            : "Cherry Fruits (Free)"
+          : complimentaryType === "cookies"
+            ? this.lang === "ml"
+              ? "ബട്ടർ കുക്കീസ് (സൗജന്യം)"
+              : "Butter Cookies (Free)"
+            : this.lang === "ml"
+              ? "സർപ്രൈസ് നോട്ട്"
+              : "Surprise Note";
 
       const orderPayload = {
         timestamp: new Date().toISOString(),
         language: this.lang,
         hamperId,
-        hamperName: this.getAttribute('hamper-name-en'),
-        basePrice: this.getAttribute('base-price'),
-        selectedAddon: 'cookies',
-        complimentaryItem: 'Butter Cookies',
-        cardThemeFallback: photoData.greetingPhotoBase64 ? 'Uploaded Photo' : 'Christmas Theme',
+        hamperName: this.getAttribute("hamper-name-en"),
+        basePrice: this.getAttribute("base-price"),
+        selectedAddon: complimentaryType,
+        complimentaryItem,
+        cardThemeFallback: photoData.greetingPhotoBase64
+          ? "Uploaded Photo"
+          : "Christmas Theme",
         customerNote,
         customerName,
         whatsappNumber,
         deliveryAddress,
         landmark,
         deliveryContactPhone,
-        ...photoData
+        ...photoData,
       };
 
-      if (sheetUrl && sheetUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+      if (sheetUrl && sheetUrl !== "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
         await fetch(sheetUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(orderPayload)
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderPayload),
         });
       } else {
         await new Promise((resolve) => setTimeout(resolve, 600));
-        console.info('Google Sheet Placeholder Mode - Order Payload:', orderPayload);
+        console.info(
+          "Google Sheet Placeholder Mode - Order Payload:",
+          orderPayload,
+        );
       }
 
       form.reset();
-      if (photoPicker && typeof photoPicker.reset === 'function') {
+      if (photoPicker && typeof photoPicker.reset === "function") {
         photoPicker.reset();
       }
 
       this.updateTexts();
       this.close();
 
-      this.dispatchEvent(new CustomEvent('order-placed', {
-        bubbles: true,
-        composed: true,
-        detail: { hamperName, addonLabel, whatsappNumber, orderPayload }
-      }));
+      this.dispatchEvent(
+        new CustomEvent("order-placed", {
+          bubbles: true,
+          composed: true,
+          detail: { hamperName, addonLabel, whatsappNumber, orderPayload },
+        }),
+      );
 
-      const modal = document.querySelector('order-success-modal');
-      if (modal && typeof modal.show === 'function') {
+      const modal = document.querySelector("order-success-modal");
+      if (modal && typeof modal.show === "function") {
         modal.show({ hamperName, addonLabel, whatsappNumber });
       }
     } catch (err) {
-      console.error('Order submission error:', err);
-      alert(this.lang === 'ml'
-        ? 'ക്ഷമിക്കണം, ഓർഡർ സമർപ്പിക്കുന്നതിൽ പിശക് സംഭവിച്ചു. വീണ്ടും ശ്രമിക്കുക.'
-        : 'Sorry, there was an error submitting your order. Please try again.');
+      console.error("Order submission error:", err);
+      alert(
+        this.lang === "ml"
+          ? "ക്ഷമിക്കണം, ഓർഡർ സമർപ്പിക്കുന്നതിൽ പിശക് സംഭവിച്ചു. വീണ്ടും ശ്രമിക്കുക."
+          : "Sorry, there was an error submitting your order. Please try again.",
+      );
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = this.translations.submit_btn;
@@ -191,14 +236,18 @@ class HamperOrderDrawer extends HTMLElement {
     root.querySelector('[data-t="wa_label"]').textContent = t.wa_label;
     root.querySelector('input[name="whatsappNumber"]').placeholder = t.wa_ph;
     root.querySelector('[data-t="addr_label"]').textContent = t.addr_label;
-    root.querySelector('textarea[name="deliveryAddress"]').placeholder = t.addr_ph;
-    root.querySelector('[data-t="landmark_label"]').textContent = t.landmark_label;
+    root.querySelector('textarea[name="deliveryAddress"]').placeholder =
+      t.addr_ph;
+    root.querySelector('[data-t="landmark_label"]').textContent =
+      t.landmark_label;
     root.querySelector('input[name="landmark"]').placeholder = t.landmark_ph;
-    root.querySelector('[data-t="contact_label"]').textContent = t.contact_label;
-    root.querySelector('input[name="deliveryContactPhone"]').placeholder = t.contact_ph;
+    root.querySelector('[data-t="contact_label"]').textContent =
+      t.contact_label;
+    root.querySelector('input[name="deliveryContactPhone"]').placeholder =
+      t.contact_ph;
     root.querySelector('[data-t="note_label"]').textContent = t.note_label;
     root.querySelector('textarea[name="customerNote"]').placeholder = t.note_ph;
-    root.querySelector('.submit-btn').textContent = t.submit_btn;
+    root.querySelector(".submit-btn").textContent = t.submit_btn;
   }
 
   render() {
@@ -330,7 +379,7 @@ class HamperOrderDrawer extends HTMLElement {
 
       <div class="collapsible-panel">
         <div class="inner-box">
-          <hamper-cookie-box></hamper-cookie-box>
+          <hamper-complimentary-box complimentary-type="${this.getAttribute("complimentary-type") || "cookies"}"></hamper-complimentary-box>
 
           <form class="order-form">
             <div class="form-title" data-t="form_heading">${t.form_heading}</div>
@@ -376,8 +425,10 @@ class HamperOrderDrawer extends HTMLElement {
       </div>
     `;
 
-    this.shadowRoot.querySelector('.order-form').addEventListener('submit', (e) => this.handleSubmit(e));
+    this.shadowRoot
+      .querySelector(".order-form")
+      .addEventListener("submit", (e) => this.handleSubmit(e));
   }
 }
 
-customElements.define('hamper-order-drawer', HamperOrderDrawer);
+customElements.define("hamper-order-drawer", HamperOrderDrawer);
