@@ -16,12 +16,10 @@ window.HAMPER_TRANSLATIONS = {
 
     card1_title: "The Classic Noel Basket",
     card1_desc:
-      "A little box of happiness—a neatly presented box with a rich spiced holiday bake, cozy scented candle, custom photo keepsake card, and chocolate treats, delivered with love to your loved ones.",
+      "A little box of happiness—a neatly presented box with a rich spiced holiday bake, cozy scented candle, custom photo keepsake card, and bite-sized sweet confections, delivered with love to your loved ones.",
 
     card2_title: "The Festive Cellar Basket",
-    card2_desc:
-      "A special glimpse of joy—everything from The Classic Noel Basket plus a festive bottle, with your love wrapped with us and delivered to the ones you love.",
-
+   card2_desc: "A special glimpse of joy—everything from The Classic Noel Basket elevated with golden-wrapped confections and a celebratory festive bottle, carrying your love with us to the ones you cherish.",
     card3_title: "Eden Signature Hamper",
     card3_desc:
       "Can't be home this Christmas? Send the love instead—everything from The Festive Cellar Basket, holiday caps, and dried fruits, delivered with love to your loved ones.",
@@ -79,16 +77,12 @@ window.HAMPER_TRANSLATIONS = {
       "സന്തോഷത്തിന്റെ ഒരു കൊച്ചു പെട്ടിയും ആഹ്ലാദത്തിന്റെ പ്രത്യേക നിമിഷങ്ങളും—നിങ്ങളുടെ ഓർഡർ നിറഞ്ഞ സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക് ഞങ്ങൾ എത്തിച്ചു നൽകുന്നു.",
 
     card1_title: "ക്ലാസിക് നോയൽ ബാസ്കറ്റ്",
-    card1_desc:
-      "സന്തോഷത്തിന്റെ ഒരു കൊച്ചു പെട്ടി—രുചികരമായ ഹോളിഡേ കേക്ക്, കാൻഡിൽ, ഫോട്ടോ കാർഡ്, ചോക്ലേറ്റ് ട്രീറ്റുകൾ എന്നിവ നിറഞ്ഞ സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക്.",
-
+    card1_desc: "സന്തോഷത്തിന്റെ ഒരു കൊച്ചു പെട്ടി—രുചികരമായ ഹോളിഡേ കേക്ക്, കാൻഡിൽ, ഫോട്ടോ കാർഡ്, കുഞ്ഞൻ മധുരവിഭവങ്ങൾ എന്നിവ, നിറഞ്ഞ സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക്.",
     card2_title: "ഫെസ്റ്റീവ് സെല്ലർ ബാസ്കറ്റ്",
-    card2_desc:
-      "ആഹ്ലാദത്തിന്റെ പ്രത്യേക നിമിഷങ്ങൾ—ക്ലാസിക് നോയൽ ബാസ്കറ്റിലെ വിഭവങ്ങൾക്കൊപ്പം ഒരു ഫെസ്റ്റീവ് ബോട്ടിലും ചേർത്ത് നിങ്ങളുടെ സ്നേഹം ഞങ്ങളോടൊപ്പം പൊതിഞ്ഞ് എത്തിക്കുന്നു.",
-
+    card2_desc: "ആഹ്ലാദത്തിന്റെ പ്രത്യേക നിമിഷങ്ങൾ—ക്ലാസിക് നോയൽ ബാസ്കറ്റിലെ വിഭവങ്ങൾക്കൊപ്പം സ്വർണ്ണപ്പൊതിയിൽ ഒരുങ്ങിയ മധുരവിഭവങ്ങളും ഒരു ഫെസ്റ്റീവ് ബോട്ടിലും ചേർത്ത് നിങ്ങളുടെ സ്നേഹം ഞങ്ങളോടൊപ്പം എത്തിക്കുന്നു.",
     card3_title: "ഈഡൻ സിഗ്നേച്ചർ ഹാംപർ",
     card3_desc:
-      "ഈ ക്രിസ്മസിന് വീട്ടിലെത്താൻ കഴിയുന്നില്ലേ? പകരം നിങ്ങളുടെ സ്നേഹം അയക്കൂ—ഫെസ്റ്റീവ് സെല്ലർ ബാസ്കറ്റിലെ വിഭവങ്ങൾ, തൊപ്പികൾ, ഡ്രൈ ഫ്രൂട്ട്സ് എന്നിവ സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക്.",
+      "ഈ ക്രിസ്മസിന് വീട്ടിലെത്താൻ കഴിയുന്നില്ലേ? പകരം നിങ്ങളുടെ സ്നേഹം അയക്കൂ—ഫെസ്റ്റീവ് സെല്ലർ ബാസ്കറ്റിലെ വിഭവങ്ങൾ, തൊപ്പികൾ, ഡ്രൈ ഫ്രൂട്ട്സ് എന്നിവ, സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക്.",
     wa_card_title: "വാട്ട്‌സ്ആപ്പ് വഴി ഓർഡർ ചെയ്യണോ?",
     wa_card_desc:
       "ഞങ്ങളുടെ നമ്പറിൽ വാട്ട്‌സ്ആപ്പ് വഴി ബന്ധപ്പെടുകയോ ക്യുആർ (QR) കോഡ് സ്കാൻ ചെയ്യുകയോ ചെയ്ത് നിങ്ങൾക്ക് അവിടെയും ഓർഡറുകൾ നൽകാവുന്നതാണ്.",
