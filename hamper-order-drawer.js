@@ -23,6 +23,32 @@ class HamperOrderDrawer extends HTMLElement {
     );
   }
 
+  get complimentaryType() {
+    return this.getAttribute("complimentary-type") || "cookies";
+  }
+
+  get complimentaryItem() {
+    const type = this.complimentaryType;
+    if (type === "cherries") return "Cherry Fruits";
+    if (type === "cookies") return "Butter Cookies";
+    if (type === "surprise-luxe") return "Christmas Decorative Surprise";
+    return "Surprise Note";
+  }
+
+  getAddonLabel_() {
+    const type = this.complimentaryType;
+    if (this.lang === "ml") {
+      if (type === "cherries") return "ചെറി ഫ്രൂട്ട്സ് (സൗജന്യം)";
+      if (type === "cookies") return "ബട്ടർ കുക്കീസ് (സൗജന്യം)";
+      if (type === "surprise-luxe") return "ക്രിസ്മസ് അലങ്കാര സർപ്രൈസ്";
+      return "സർപ്രൈസ് നോട്ട്";
+    }
+    if (type === "cherries") return "Cherry Fruits (Free)";
+    if (type === "cookies") return "Butter Cookies (Free)";
+    if (type === "surprise-luxe") return "Christmas Decorative Surprise";
+    return "Surprise Note";
+  }
+
   setLang(lang) {
     this.lang = lang;
     this.updateTexts();
@@ -135,27 +161,9 @@ class HamperOrderDrawer extends HTMLElement {
           ? this.getAttribute("hamper-name-ml")
           : this.getAttribute("hamper-name-en");
 
-      const complimentaryType =
-        this.getAttribute("complimentary-type") || "cookies";
-      const complimentaryItem =
-        complimentaryType === "cherries"
-          ? "Cherry Fruits"
-          : complimentaryType === "cookies"
-            ? "Butter Cookies"
-            : "Surprise Note";
-
-      const addonLabel =
-        complimentaryType === "cherries"
-          ? this.lang === "ml"
-            ? "ചെറി ഫ്രൂട്ട്സ് (സൗജന്യം)"
-            : "Cherry Fruits (Free)"
-          : complimentaryType === "cookies"
-            ? this.lang === "ml"
-              ? "ബട്ടർ കുക്കീസ് (സൗജന്യം)"
-              : "Butter Cookies (Free)"
-            : this.lang === "ml"
-              ? "സർപ്രൈസ് നോട്ട്"
-              : "Surprise Note";
+      const complimentaryType = this.complimentaryType;
+      const complimentaryItem = this.complimentaryItem;
+      const addonLabel = this.getAddonLabel_();
 
       const orderPayload = {
         timestamp: new Date().toISOString(),
@@ -379,7 +387,7 @@ class HamperOrderDrawer extends HTMLElement {
 
       <div class="collapsible-panel">
         <div class="inner-box">
-          <hamper-complimentary-box complimentary-type="${this.getAttribute("complimentary-type") || "cookies"}"></hamper-complimentary-box>
+          <hamper-complimentary-box complimentary-type="${this.complimentaryType}"></hamper-complimentary-box>
 
           <form class="order-form">
             <div class="form-title" data-t="form_heading">${t.form_heading}</div>

@@ -14,21 +14,31 @@ window.HAMPER_TRANSLATIONS = {
     subtitle:
       "A little box of happiness and a special glimpse of joy—your order will be delivered with love to your loved ones, carrying your warmth wrapped with us to the ones you love.",
 
+    card1_badge: "✨ Best Seller",
     card1_title: "The Classic Noel Basket",
     card1_desc:
       "A little box of happiness—a neatly presented box with a rich spiced holiday bake, cozy scented candle, custom photo keepsake card, and bite-sized sweet confections, delivered with love to your loved ones.",
+    card1_cta: "Select Classic Noel",
 
+    card2_badge: "✨ Festive Favorite",
     card2_title: "The Festive Cellar Basket",
-   card2_desc: "A special glimpse of joy—everything from The Classic Noel Basket elevated with golden-wrapped confections and a celebratory festive bottle, carrying your love with us to the ones you cherish.",
+    card2_desc:
+      "A special glimpse of joy—everything from The Classic Noel Basket elevated with golden-wrapped confections and a celebratory festive bottle, carrying your love with us to the ones you cherish.",
+    card2_cta: "Select Festive Cellar",
+
+    card3_badge: "✨ Signature Choice",
     card3_title: "Eden Signature Hamper",
     card3_desc:
-      "Can't be home this Christmas? Send the love instead—everything from The Festive Cellar Basket, holiday caps, and dried fruits, delivered with love to your loved ones.",
-    wa_card_title: "Prefer Ordering on WhatsApp?",
-    wa_card_desc:
-      "Reach out to us directly on WhatsApp or scan the QR code to chat with us and place your Christmas hamper order effortlessly.",
-    wa_card_btn: "Chat & Order on WhatsApp",
-    wa_qr_caption: "Scan to Order on WhatsApp",
-    close_btn: "Close",
+      "Our curated luxury experience—everything from The Festive Cellar Basket plus cheerful holiday caps, premium dried fruits, and a small wrapped surprise note, presented in our premium wicker basket.",
+    card3_cta: "Select Eden Signature",
+    card4_badge: "✨ Exclusive Table Add-On",
+    card4_title: "The Grand Bethlehem Reserve",
+    card4_desc:
+      "An elevated festive upgrade built on our signature hamper—bringing together a richer holiday bake, celebratory wine, cozy Christmas mugs, cheerful caps, and a hidden Christmas decorative surprise ready to unbox.",
+    card4_cta: "Reserve Bethlehem Add-On",
+    card4_surprise: "A special Christmas decorative surprise tucked inside.",
+
+    // -- Curated Perks Text --
     complimentary_cherry_badge:
       "✨ Complimentary Cherry Fruits added to your box!",
     box_status_cherry: "Cherry Fruits packed & box sealed!",
@@ -36,6 +46,22 @@ window.HAMPER_TRANSLATIONS = {
     complimentary_cookie_badge:
       "✨ Complimentary Butter Cookies added to your box!",
     box_status_cookie: "Butter Cookies packed & box sealed!",
+
+    complimentary_surprise_badge: "✨ Personal Surprise Note tucked inside!",
+    box_status_surprise: "Surprise note sealed inside!",
+
+    // -- NEW PERK TEXT FOR ₹3900 TIER --
+    complimentary_surprise_luxe_badge:
+      "✨ A special surprise awaits you inside!",
+    box_status_surprise_luxe: "A special surprise awaits you inside!",
+
+    wa_card_title: "Prefer Ordering on WhatsApp?",
+    wa_card_desc:
+      "Reach out to us directly on WhatsApp or scan the QR code to chat with us and place your Christmas hamper order effortlessly.",
+    wa_card_btn: "Chat & Order on WhatsApp",
+    wa_qr_caption: "Scan to Order on WhatsApp",
+    close_btn: "Close",
+
     form_heading: "Delivery Details",
     name_label: "Your Full Name *",
     name_ph: "Enter your name",
@@ -76,13 +102,32 @@ window.HAMPER_TRANSLATIONS = {
     subtitle:
       "സന്തോഷത്തിന്റെ ഒരു കൊച്ചു പെട്ടിയും ആഹ്ലാദത്തിന്റെ പ്രത്യേക നിമിഷങ്ങളും—നിങ്ങളുടെ ഓർഡർ നിറഞ്ഞ സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക് ഞങ്ങൾ എത്തിച്ചു നൽകുന്നു.",
 
-    card1_title: "ക്ലാസിക് നോയൽ ബാസ്കറ്റ്",
-    card1_desc: "സന്തോഷത്തിന്റെ ഒരു കൊച്ചു പെട്ടി—രുചികരമായ ഹോളിഡേ കേക്ക്, കാൻഡിൽ, ഫോട്ടോ കാർഡ്, കുഞ്ഞൻ മധുരവിഭവങ്ങൾ എന്നിവ, നിറഞ്ഞ സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക്.",
-    card2_title: "ഫെസ്റ്റീവ് സെല്ലർ ബാസ്കറ്റ്",
-    card2_desc: "ആഹ്ലാദത്തിന്റെ പ്രത്യേക നിമിഷങ്ങൾ—ക്ലാസിക് നോയൽ ബാസ്കറ്റിലെ വിഭവങ്ങൾക്കൊപ്പം സ്വർണ്ണപ്പൊതിയിൽ ഒരുങ്ങിയ മധുരവിഭവങ്ങളും ഒരു ഫെസ്റ്റീവ് ബോട്ടിലും ചേർത്ത് നിങ്ങളുടെ സ്നേഹം ഞങ്ങളോടൊപ്പം എത്തിക്കുന്നു.",
+    card1_badge: "✨ ബെസ്റ്റ് സെല്ലർ",
+    card1_title: "ദി ക്ലാസിക് നോയൽ ബാസ്കറ്റ്",
+    card1_desc:
+      "സന്തോഷത്തിന്റെ ഒരു കൊച്ചു പെട്ടി—രുചികരമായ ഹോളിഡേ കേക്ക്, കാൻഡിൽ, ഫോട്ടോ കാർഡ്, കുഞ്ഞൻ മധുരവിഭവങ്ങൾ എന്നിവ നിറഞ്ഞ സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക്.",
+    card1_cta: "ക്ലാസിക് നോയൽ തിരഞ്ഞെടുക്കുക",
+
+    card2_badge: "✨ ഫെസ്റ്റീവ് ഫേവറിറ്റ്",
+    card2_title: "ദി ഫെസ്റ്റീവ് സെല്ലർ ബാസ്കറ്റ്",
+    card2_desc:
+      "ആഹ്ലാദത്തിന്റെ പ്രത്യേക നിമിഷങ്ങൾ—ക്ലാസിക് നോയൽ ബാസ്കറ്റിലെ വിഭവങ്ങൾക്കൊപ്പം സ്വർണ്ണപ്പൊതിയിൽ ഒരുങ്ങിയ മധുരവിഭവങ്ങളും ഒരു ഫെസ്റ്റീവ് ബോട്ടിലും ചേർത്ത് നിങ്ങളുടെ സ്നേഹം ഞങ്ങളോടൊപ്പം എത്തിക്കുന്നു.",
+    card2_cta: "ഫെസ്റ്റീവ് സെല്ലർ തിരഞ്ഞെടുക്കുക",
+
+    card3_badge: "✨ സിഗ്നേച്ചർ ചോയ്‌സ്",
     card3_title: "ഈഡൻ സിഗ്നേച്ചർ ഹാംപർ",
     card3_desc:
-      "ഈ ക്രിസ്മസിന് വീട്ടിലെത്താൻ കഴിയുന്നില്ലേ? പകരം നിങ്ങളുടെ സ്നേഹം അയക്കൂ—ഫെസ്റ്റീവ് സെല്ലർ ബാസ്കറ്റിലെ വിഭവങ്ങൾ, തൊപ്പികൾ, ഡ്രൈ ഫ്രൂട്ട്സ് എന്നിവ, സ്നേഹത്തോടെ പ്രിയപ്പെട്ടവരിലേക്ക്.",
+      "ഞങ്ങളുടെ എക്സ്ക്ലൂസീവ് ലക്ഷ്വറി അനുഭവം—ഫെസ്റ്റീവ് സെല്ലർ ബാസ്കറ്റിലെ വിഭവങ്ങൾക്കൊപ്പം ക്രിസ്മസ് തൊപ്പികൾ, ഡ്രൈ ഫ്രൂട്ട്സ്, ഒരു സർപ്രൈസ് നോട്ട് എന്നിവയും ഈഡൻ വുഡൻ പെട്ടിയിൽ.",
+    card3_cta: "ഈഡൻ സിഗ്നേച്ചർ തിരഞ്ഞെടുക്കുക",
+
+    // -- NEW ADD-ON TIER --
+    card4_badge: "✨ എക്സ്ക്ലൂസീവ് ഫെസ്റ്റീവ് ആഡ്-ഓൺ",
+    card4_title: "ദി ഗ്രാൻഡ് ബെത്‌ലഹേം റിസർവ്",
+    card4_desc:
+      "സിഗ്നേച്ചർ ഹാംപറിനൊപ്പം കൂടുതൽ ആഘോഷപ്പൊലിമ—പ്രീമിയം കേക്ക്, ഫെസ്റ്റീവ് വൈൻ, ക്രിസ്മസ് മഗ്ഗുകൾ, തൊപ്പികൾ എന്നിവയ്ക്കൊപ്പം ഒരു രഹസ്യ ക്രിസ്മസ് അലങ്കാര സമ്മാനവും സ്നേഹത്തോടെ.",
+    card4_cta: "ബെത്‌ലഹേം ആഡ്-ഓൺ തിരഞ്ഞെടുക്കുക",
+    card4_surprise:
+      "പ്രത്യേക ക്രിസ്മസ് അലങ്കാര സമ്മാനം ഉള്ളിൽ ഒരുക്കിയിട്ടുണ്ട്.",
     wa_card_title: "വാട്ട്‌സ്ആപ്പ് വഴി ഓർഡർ ചെയ്യണോ?",
     wa_card_desc:
       "ഞങ്ങളുടെ നമ്പറിൽ വാട്ട്‌സ്ആപ്പ് വഴി ബന്ധപ്പെടുകയോ ക്യുആർ (QR) കോഡ് സ്കാൻ ചെയ്യുകയോ ചെയ്ത് നിങ്ങൾക്ക് അവിടെയും ഓർഡറുകൾ നൽകാവുന്നതാണ്.",
@@ -97,6 +142,16 @@ window.HAMPER_TRANSLATIONS = {
     complimentary_cookie_badge:
       "✨ സൗജന്യ ബട്ടർ കുക്കീസ് നിങ്ങളുടെ ബോക്സിൽ ചേർത്തിട്ടുണ്ട്!",
     box_status_cookie: "ബട്ടർ കുക്കീസ് ചേർത്ത് ബോക്സ് അടച്ചിരിക്കുന്നു!",
+
+    complimentary_surprise_badge:
+      "✨ ഒരു സർപ്രൈസ് നോട്ട് ബോക്സിൽ ഉൾപ്പെടുത്തിയിട്ടുണ്ട്!",
+    box_status_surprise: "സർപ്രൈസ് നോട്ട് സുരക്ഷിതമായി ബോക്സിൽ!",
+
+    // -- NEW PERK TEXT FOR ₹3900 TIER --
+    complimentary_surprise_luxe_badge:
+      "✨ നിങ്ങൾക്കായി ഒരു പ്രത്യേക സർപ്രൈസ് ഉള്ളിൽ കാത്തിരിക്കുന്നു!",
+    box_status_surprise_luxe:
+      "നിങ്ങൾക്കായി ഒരു പ്രത്യേക സർപ്രൈസ് ഉള്ളിൽ കാത്തിരിക്കുന്നു!",
     form_heading: "ഡെലിവറി വിവരങ്ങൾ",
     name_label: "നിങ്ങളുടെ മുഴുവൻ പേര് *",
     name_ph: "പേര് നൽകുക",
