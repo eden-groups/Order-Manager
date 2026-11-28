@@ -682,8 +682,8 @@
           <p class="desc" data-i18n="card4_desc">
             An elevated festive upgrade built on our signature hamper—bringing
             together a richer holiday bake, celebratory wine, cozy Christmas
-            mugs, cheerful caps, and a hidden Christmas decorative surprise ready
-            to unbox.
+            mugs, cheerful caps, and a hidden Christmas decorative surprise
+            ready to unbox.
           </p>
           <div class="surprise-note">
             <div class="surprise-box-icon" aria-hidden="true">
@@ -802,6 +802,62 @@
       // Initialize saved language
       const savedLang = localStorage.getItem("hamper_lang") || "en";
       setLanguage(savedLang);
+      function getVisitorId_() {
+        const key = "hamper_visitor_id";
+        let id = localStorage.getItem(key);
+        let isNewVisitor = false;
+
+        if (!id) {
+          id =
+            "v_" +
+            Date.now().toString(36) +
+            "_" +
+            Math.random().toString(36).substring(2, 8);
+          localStorage.setItem(key, id);
+          isNewVisitor = true;
+        }
+
+        return { visitorId: id, isNewVisitor };
+      }
+
+      function trackPageLanding() {
+        const sheetUrl =
+          window.HAMPER_CONFIG && window.HAMPER_CONFIG.GOOGLE_SHEET_WEB_APP_URL;
+
+        if (
+          !sheetUrl ||
+          sheetUrl === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE"
+        ) {
+          return;
+        }
+        console.log("reaching here")
+        // Count once per browser tab session so reloads don't inflate Total Visits
+        // if (sessionStorage.getItem("hamper_landing_tracked")) {
+        //   return;
+        // }
+        console.log("reaching next step")
+        sessionStorage.setItem("hamper_landing_tracked", "1");
+
+        const { visitorId, isNewVisitor } = getVisitorId_();
+
+        fetch(sheetUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "page_view",
+            visitorId,
+            isNewVisitor,
+            lang: localStorage.getItem("hamper_lang") || "en",
+            referrer: document.referrer || "direct",
+          }),
+        }).catch(() => {
+          // Fail silently so visitor experience is never interrupted
+          console.error("error")
+        });
+      }
+
+      window.addEventListener("DOMContentLoaded", trackPageLanding);
     </script>
   </body>
 </html>

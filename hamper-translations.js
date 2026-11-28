@@ -2,7 +2,7 @@
 window.HAMPER_CONFIG = {
   // Paste your deployed Google Apps Script Web App URL here:
   GOOGLE_SHEET_WEB_APP_URL:
-    "https://script.google.com/macros/s/AKfycbxO3d4fqoA1dl77bncOJwEr5Lvsl6NavkrT5pmIZj18K2RqVMUSC7zGpT1wLiEiOARl/exec",
+    "https://script.google.com/macros/s/AKfycbzhKqPT4RvFaGqLY5QXiVwKK8QjmpL6sNvYGYCBxQyT8LdaO_fR7p-hgRRN7w0lYe77/exec",
   DAILY_ORDER_LIMIT: 100,
 };
 
